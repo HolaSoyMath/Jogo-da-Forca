@@ -18,8 +18,8 @@ export function useLetterVerification() {
   }
 
   useEffect(() => {
-    console.log('CorrectList: ', listCorrectLetters);
-    console.log('WrongList: ', listWrongLetters);
+    console.log('function CorrectList: ', listCorrectLetters);
+    console.log('function WrongList: ', listWrongLetters);
   }, [listCorrectLetters, listWrongLetters])
 
   return { listCorrectLetters, listWrongLetters, verifyWord };

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import LetterButton from "../atoms/LetterButton";
 import { useLetterVerification } from "../../../hooks/useLetterVerification";
 
@@ -8,6 +8,11 @@ export default function LetterGroup() {
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
   const { listCorrectLetters, listWrongLetters, verifyWord } =
     useLetterVerification();
+
+  useEffect(() => {
+    console.log("LetterGroup CorrectList: ", listCorrectLetters);
+    console.log("LetterGroup WrongList: ", listWrongLetters);
+  }, [listCorrectLetters, listWrongLetters]);
 
   return (
     <div className="grid grid-cols-12 gap-2">
