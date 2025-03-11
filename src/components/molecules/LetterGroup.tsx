@@ -2,30 +2,23 @@
 
 import React from "react";
 import LetterButton from "../atoms/LetterButton";
+import { useLetterVerification } from "../../../hooks/useLetterVerification";
 
-interface LetterGroupProps {
-  onLetterSelect: (letter: string) => void;
-  wrongLetters: string[];
-  correctLetters: string[];
-}
-
-export default function LetterGroup({
-  onLetterSelect,
-  wrongLetters = [],
-  correctLetters = [],
-}: LetterGroupProps) {
+export default function LetterGroup() {
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+  const { listCorrectLetters, listWrongLetters, verifyWord } =
+    useLetterVerification();
 
   return (
     <div className="grid grid-cols-12 gap-2">
       {alphabet.map((letter, index) => (
         <LetterButton
           key={index}
-          onClick={() => onLetterSelect(letter)}
+          onClick={() => verifyWord(letter)}
           className={`${
-            wrongLetters.includes(letter)
+            listWrongLetters.includes(letter)
               ? "bg-red-500"
-              : correctLetters.includes(letter)
+              : listCorrectLetters.includes(letter)
               ? "bg-green-500"
               : ""
           }`}
