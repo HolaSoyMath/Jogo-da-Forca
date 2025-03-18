@@ -1,18 +1,20 @@
-"use client";
-
-import React, { useEffect } from "react";
+import React, { useContext } from "react";
 import LetterButton from "../atoms/LetterButton";
 import { useLetterVerification } from "../../../hooks/useLetterVerification";
+import GameContext from "@/contexts/GameContext";
 
 export default function LetterGroup() {
-  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-  const { listCorrectLetters, listWrongLetters, verifyWord } =
-    useLetterVerification();
 
-  useEffect(() => {
-    console.log("LetterGroup CorrectList: ", listCorrectLetters);
-    console.log("LetterGroup WrongList: ", listWrongLetters);
-  }, [listCorrectLetters, listWrongLetters]);
+  const context = useContext(GameContext);
+
+  if(!context) {
+    throw new Error ("GameContext not found in LetterGroup.tsx")
+  }
+
+  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+  const { verifyWord } = useLetterVerification();
+
+  const { correctLetters, wrongLetters } = context;
 
   return (
     <div className="grid grid-cols-12 gap-2">
@@ -20,13 +22,15 @@ export default function LetterGroup() {
         <LetterButton
           key={index}
           onClick={() => verifyWord(letter)}
+          disabled={correctLetters.includes(letter) || wrongLetters.includes(letter)}
           className={`${
-            listWrongLetters.includes(letter)
+            wrongLetters.includes(letter)
               ? "bg-red-500"
-              : listCorrectLetters.includes(letter)
+              : correctLetters.includes(letter)
               ? "bg-green-500"
               : ""
-          }`}
+          }
+            `}
         >
           {letter}
         </LetterButton>

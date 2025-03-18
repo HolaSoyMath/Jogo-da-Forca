@@ -1,26 +1,31 @@
-import { useEffect, useState } from "react";
+import GameContext from "@/contexts/GameContext";
 import { choicedWord } from "./choicedWord";
+import { useContext, useEffect } from "react";
+import { useGameStats } from "./useGameState";
 
 export function useLetterVerification() {
-  const [listCorrectLetters, setListCorrectLetters] = useState<string[]>([]);
-  const [listWrongLetters, setListWrongLetters] = useState<string[]>([]);
+  const context = useContext(GameContext);
 
-  function verifyWord(letter: string) {
-    const word = choicedWord().word.split("");
-
-    if (word.includes(letter)) {
-      setListCorrectLetters((prevList) => [...prevList, letter]);
-    } else {
-      setListWrongLetters((prevList) => [...prevList, letter]);
-    }
-
-    
+  if (!context) {
+    throw new Error("Not found a GameContext in useLetterVerification.ts");
   }
 
-  useEffect(() => {
-    console.log('function CorrectList: ', listCorrectLetters);
-    console.log('function WrongList: ', listWrongLetters);
-  }, [listCorrectLetters, listWrongLetters])
+  const { setCorrectLetters, setWrongLetters, correctLetters, wrongLetters } = context;
+  const { isUserWin, isUserLoss } = useGameStats();
+  const correctWord = choicedWord().word.split("");
 
-  return { listCorrectLetters, listWrongLetters, verifyWord };
+  useEffect(() => {
+    isUserWin();
+    isUserLoss();
+  }, [correctLetters, wrongLetters, isUserWin, isUserLoss])
+
+  function verifyWord(letter: string) {
+    if (correctWord.includes(letter)) {
+      setCorrectLetters((prevList) => [...prevList, letter]);
+    } else {
+      setWrongLetters((prevList) => [...prevList, letter]);
+    }
+  }
+
+  return { verifyWord };
 }
