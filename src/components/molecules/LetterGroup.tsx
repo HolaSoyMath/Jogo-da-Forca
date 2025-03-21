@@ -14,7 +14,7 @@ export default function LetterGroup() {
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
   const { verifyWord } = useLetterVerification();
 
-  const { correctLetters, wrongLetters } = context;
+  const { correctLetters, wrongLetters, gameState } = context;
 
   return (
     <div className="grid grid-cols-12 gap-2">
@@ -22,7 +22,7 @@ export default function LetterGroup() {
         <LetterButton
           key={index}
           onClick={() => verifyWord(letter)}
-          disabled={correctLetters.includes(letter) || wrongLetters.includes(letter)}
+          disabled={correctLetters.includes(letter) || wrongLetters.includes(letter) || gameState === 'win' || gameState === 'loss'}
           className={`${
             wrongLetters.includes(letter)
               ? "bg-red-500"

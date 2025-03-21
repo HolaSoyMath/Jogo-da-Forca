@@ -1,10 +1,15 @@
-import { wordsListHangman } from "../words.mock";
+import { wordsListHangman } from "../src/mock/words.mock";
 
-export function choicedWord() {
-  const SECRET_WORD = wordsListHangman[3];
-  const idWord = SECRET_WORD.id;
+function randomBetween(min: number, max: number): number {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+export function choicedWord(): {id: number, word: string, category: string} {
+  const randomValue = randomBetween(1, 189)
+  const SECRET_WORD = wordsListHangman[randomValue];
+  const id = SECRET_WORD.id;
   const word = SECRET_WORD.word.toUpperCase();
-  const categoryWord = SECRET_WORD.category;
+  const category = SECRET_WORD.category;
 
-  return {idWord, word, categoryWord};
+  return {id, word, category};
 }

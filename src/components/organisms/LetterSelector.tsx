@@ -3,7 +3,6 @@
 import React, { useContext } from "react";
 import LetterGroup from "../molecules/LetterGroup";
 import GameContext from "@/contexts/GameContext";
-import { choicedWord } from "../../../hooks/choicedWord";
 
 export default function LetterSelector() {
   const context = useContext(GameContext);
@@ -11,15 +10,15 @@ export default function LetterSelector() {
     throw new Error("GameContext not found in LetterSelector.tsx");
   }
 
-  const { categoryWord, word } = choicedWord();
+  const { word } = context;
 
   return (
     <div className="w-full">
       <div className="mb-4">
         <p className="mb-4 w-full text-center font-semibold">
-          Dica: {categoryWord}
+          Dica: {word.category}
         </p>
-        <p className="mb-4 w-full text-center font-semibold">Palavra: {word}</p>
+        <p className="mb-4 w-full text-center font-semibold">Palavra: {word.word}</p>
       </div>
       <LetterGroup />
     </div>

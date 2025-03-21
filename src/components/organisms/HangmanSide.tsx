@@ -4,7 +4,6 @@ import React, { useContext } from "react";
 import HangmanDrawing from "../HagmanDrawing";
 import { useTheme } from "next-themes";
 import { Heart, Skull } from "lucide-react";
-import { choicedWord } from "../../../hooks/choicedWord";
 import GameContext from "@/contexts/GameContext";
 
 export default function HangmanSide() {
@@ -14,11 +13,10 @@ export default function HangmanSide() {
     throw new Error ("GameContext not found in HangmanSide.tsx")
   }
 
-  const { correctLetters, wrongLetters } = context;
+  const { correctLetters, wrongLetters, word } = context;
 
-  const { word } = choicedWord();
   const theme = useTheme().theme;
-  const selectedWord = word.split("");
+  const selectedWord = word.word.split("");
 
   return (
     <div className="w-full">
