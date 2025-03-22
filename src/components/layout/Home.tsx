@@ -47,6 +47,7 @@ export default function HomeLayout() {
         >
           <HangmanSide />
           <LetterSelector />
+          
           <WinGame />
           <LossGame />
         </GameContext.Provider>
