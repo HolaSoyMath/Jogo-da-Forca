@@ -1,5 +1,6 @@
 import GameContext from "@/contexts/GameContext";
 import { GameState } from "@/enums/GameState";
+import { removeDiacritics } from "@/functions/RemoveDiacritics";
 import { useContext } from "react";
 
 function changeScoreboard(scoreboard: string){
@@ -17,7 +18,7 @@ export function useGameStats() {
 
   const { correctLetters, setCorrectLetters, wrongLetters, setWrongLetters, setGameState, gameState, word } = context;
 
-  const correctWord = word.word.split("");
+  const correctWord = removeDiacritics(word.word.toUpperCase()).split("");
 
   function checkGameState() {
     if (gameState !== GameState.Playing) {

@@ -1,6 +1,7 @@
 import GameContext from "@/contexts/GameContext";
 import { useContext, useEffect } from "react";
 import { useGameStats } from "./useGameStats";
+import { removeDiacritics } from "@/functions/RemoveDiacritics";
 
 export function useLetterVerification() {
   const context = useContext(GameContext);
@@ -12,7 +13,7 @@ export function useLetterVerification() {
   const { setCorrectLetters, setWrongLetters, correctLetters, wrongLetters, word } =
     context;
   const { checkGameState } = useGameStats();
-  const correctWord = word.word.split("");
+  const correctWord = removeDiacritics(word.word.toUpperCase()).split("");
 
   useEffect(() => {
     checkGameState();
