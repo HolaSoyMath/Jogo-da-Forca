@@ -35,7 +35,7 @@ export default function HomeLayout() {
 
   return (
     <div className="w-full">
-      <div className="flex justify-between items-center h-full max-w-[900px] mx-auto">
+      <div className="flex flex-col gap-5 lg:flex-row justify-between items-center h-full max-w-[900px] mx-auto">
         <GameContext.Provider
           value={{
             word: chosenWord,
@@ -48,7 +48,7 @@ export default function HomeLayout() {
           }}
         >
           <HangmanSide />
-          <div className="h-96 flex flex-col justify-between pb-4 min-w-[300px]">
+          <div className="h-full gap-4 lg:h-96 flex flex-col justify-between pb-4 min-w-[300px]">
             <LetterSelector />
             {gameState === GameState.Win || gameState === GameState.Loss && <ResetGame />}
           </div>
