@@ -2,6 +2,12 @@ import GameContext from "@/contexts/GameContext";
 import { GameState } from "@/enums/GameState";
 import { useContext } from "react";
 
+function changeScoreboard(scoreboard: string){
+  const localValue = localStorage.getItem(scoreboard)
+  const newValue: number = localValue ? parseInt(localValue) + 1 : 1
+  localStorage.setItem(scoreboard, newValue.toString())
+}
+
 export function useGameStats() {
   const context = useContext(GameContext);
 
@@ -14,7 +20,7 @@ export function useGameStats() {
   const correctWord = word.word.split("");
 
   function checkGameState() {
-    if (gameState === GameState.Win || gameState === GameState.Loss) {
+    if (gameState !== GameState.Playing) {
       return;
     }
 
@@ -24,12 +30,15 @@ export function useGameStats() {
 
     if (allLettersGuessed) {
       setGameState(GameState.Win);
-      
+      changeScoreboard('win')
     }
 
     if (wrongLetters.length === 6) {
       setGameState(GameState.Loss);
+      changeScoreboard('loss')
     }
+    console.log('Win: ', localStorage.getItem('win'));
+    console.log('Loss: ', localStorage.getItem('loss'));
   }
 
   function resetGame() {
