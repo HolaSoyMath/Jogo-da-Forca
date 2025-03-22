@@ -8,8 +8,8 @@ import {
   DialogHeader,
 } from "../ui/dialog";
 import GameContext from "@/contexts/GameContext";
-import { useGameStats } from "../../../hooks/useGameStats";
 import ChartResults from "../molecules/ChartResults";
+import ResetGame from "../atoms/ResetGame";
 
 export default function LossGame() {
   const context = useContext(GameContext);
@@ -19,7 +19,6 @@ export default function LossGame() {
   }
 
   const { gameState } = context;
-  const { resetGame } = useGameStats();
   return (
     <Dialog open={gameState === "loss"}>
       <DialogContent>
@@ -31,8 +30,13 @@ export default function LossGame() {
             <p className="w-1/2 text-center text-foreground font-semibold">Derrota</p>
           </div>
         </DialogDescription>
-        <DialogFooter>
-          <DialogClose onClick={() => resetGame()}>Fechar</DialogClose>
+        <DialogFooter className="flex-row justify-between">
+          <div className="flex w-full items-center">
+            <DialogClose>Fechar</DialogClose>
+          </div>
+          <div>
+            <ResetGame />
+          </div>
         </DialogFooter>
       </DialogContent>
     </Dialog>

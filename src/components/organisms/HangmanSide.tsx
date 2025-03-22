@@ -19,7 +19,7 @@ export default function HangmanSide() {
   const selectedWord = word.word.split("");
 
   return (
-    <div className="w-full">
+    <div className="w-full px-4">
       <div className="flex justify-center items-center gap-4 w-full h-8">
         {[...Array(6 - wrongLetters.length)].map((_, index) => (
           <Heart key={index} className="fill-red-600 text-red-600" />

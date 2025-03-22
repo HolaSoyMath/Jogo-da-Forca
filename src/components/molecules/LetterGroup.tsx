@@ -17,7 +17,7 @@ export default function LetterGroup() {
   const { correctLetters, wrongLetters, gameState } = context;
 
   return (
-    <div className="grid grid-cols-12 gap-2">
+    <div className="grid grid-cols-9 gap-2">
       {alphabet.map((letter, index) => (
         <LetterButton
           key={index}

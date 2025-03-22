@@ -9,6 +9,7 @@ import WinGame from "../organisms/WinGame";
 import { choicedWord } from "../../../hooks/choicedWord";
 import { GameState } from "@/enums/GameState";
 import WinFireworks from "../atoms/WinFireworks"
+import ResetGame from "../atoms/ResetGame";
 
 export default function HomeLayout() {
   const [correctLetters, setCorrectLetters] = useState<string[]>([]);
@@ -47,7 +48,10 @@ export default function HomeLayout() {
           }}
         >
           <HangmanSide />
-          <LetterSelector />
+          <div className="h-96 flex flex-col justify-between pb-4 min-w-[300px]">
+            <LetterSelector />
+            {gameState === GameState.Win || gameState === GameState.Loss && <ResetGame />}
+          </div>
           <WinGame />
           <LossGame />
           {gameState === GameState.Win && <WinFireworks />}
