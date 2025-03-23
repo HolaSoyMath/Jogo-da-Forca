@@ -8,18 +8,33 @@ import LossGame from "../organisms/LossGame";
 import WinGame from "../organisms/WinGame";
 import { choicedWord } from "../../../hooks/choicedWord";
 import { GameState } from "@/enums/GameState";
-import WinFireworks from "../atoms/WinFireworks"
+import WinFireworks from "../atoms/WinFireworks";
 import ResetGame from "../atoms/ResetGame";
 
 export default function HomeLayout() {
   const [correctLetters, setCorrectLetters] = useState<string[]>([]);
   const [wrongLetters, setWrongLetters] = useState<string[]>([]);
   const [gameState, setGameState] = useState(GameState.Initial);
-  const [chosenWord, setChosenWord] = useState<{ id: number; word: string; category: string }>({
+  const [chosenWord, setChosenWord] = useState<{
+    id: number;
+    word: string;
+    category: string;
+  }>({
     id: 0,
     word: "",
     category: "",
   });
+  const [modalOpenLoss, setModalOpenLoss] = useState(false);
+  const [modalOpenWin, setModalOpenWin] = useState(false);
+
+  useEffect(() => {
+    if (gameState === GameState.Loss) {
+      setModalOpenLoss(true);
+    }
+    if (gameState === GameState.Win) {
+      setModalOpenWin(true);
+    }
+  }, [gameState]);
 
   useEffect(() => {
     if (gameState === GameState.Initial) {
@@ -45,12 +60,17 @@ export default function HomeLayout() {
             setWrongLetters,
             gameState,
             setGameState,
+            modalOpenLoss,
+            setModalOpenLoss,
+            modalOpenWin,
+            setModalOpenWin,
           }}
         >
           <HangmanSide />
           <div className="h-full gap-4 lg:h-96 flex flex-col justify-between pb-4 min-w-[300px]">
             <LetterSelector />
-            {gameState === GameState.Win || gameState === GameState.Loss && <ResetGame />}
+            {gameState === GameState.Win ||
+              (gameState === GameState.Loss && <ResetGame />)}
           </div>
           <WinGame />
           <LossGame />

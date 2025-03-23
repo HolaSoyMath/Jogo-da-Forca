@@ -18,9 +18,17 @@ export default function WinGame() {
     throw new Error("Context not found in WinGame.tsx");
   }
 
-  const { gameState } = context;
+  const { modalOpenWin, setModalOpenWin } = context;
+  
   return (
-    <Dialog open={gameState === "win"}>
+    <Dialog
+      open={modalOpenWin}
+      onOpenChange={(open) => {
+        if (!open) {
+          setModalOpenWin(false);
+        }
+      }}
+    >
       <DialogContent>
         <DialogHeader>
           Parabéns, você acertou a palavra! Sua inteligência venceu a forca!

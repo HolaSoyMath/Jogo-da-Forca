@@ -18,16 +18,30 @@ export default function LossGame() {
     throw new Error("Context not found in LossGame.tsx");
   }
 
-  const { gameState } = context;
+  const { modalOpenLoss, setModalOpenLoss } = context;
+
   return (
-    <Dialog open={gameState === "loss"}>
+    <Dialog
+      open={modalOpenLoss}
+      onOpenChange={(open) => {
+        if (!open) {
+          setModalOpenLoss(false);
+        }
+      }}
+    >
       <DialogContent>
-        <DialogHeader>Que pena, você foi enforcado! <br /> Tente novamente e desvende a próxima palavra!</DialogHeader>
+        <DialogHeader>
+          Que pena, você foi enforcado! <br /> Tente novamente e desvende a próxima palavra!
+        </DialogHeader>
         <DialogDescription>
           <ChartResults />
           <div className="flex px-12 gap-x-2">
-            <p className="w-1/2 text-center text-foreground font-semibold">Vitória</p>
-            <p className="w-1/2 text-center text-foreground font-semibold">Derrota</p>
+            <p className="w-1/2 text-center text-foreground font-semibold">
+              Vitória
+            </p>
+            <p className="w-1/2 text-center text-foreground font-semibold">
+              Derrota
+            </p>
           </div>
         </DialogDescription>
         <DialogFooter className="flex-row justify-between">
