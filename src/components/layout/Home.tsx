@@ -50,7 +50,7 @@ export default function HomeLayout() {
 
   return (
     <div className="w-full">
-      <div className="flex flex-col gap-10 lg:gap-2 lg:flex-row justify-between items-center h-full max-w-[900px] mx-auto">
+      <div className="flex flex-col gap-10 lg:gap-2 lg:flex-row justify-between items-center h-full max-w-[900px] mx-auto px-10">
         <GameContext.Provider
           value={{
             word: chosenWord,
