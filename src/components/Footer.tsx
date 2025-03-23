@@ -5,7 +5,7 @@ import React from "react";
 export default function Footer() {
   return (
     <footer className="mb-7 mt-5 w-full">
-      <div className="flex justify-between max-w-[900px] mx-auto">
+      <div className="flex flex-col gap-10 md:flex-row justify-between max-w-[900px] mx-auto px-10 md:px-0">
         <div className="max-w-[450px] h-full">
           <p className="text-xl font-semibold h-11 flex items-center">Objetivo</p>
           <p className="mt-5">

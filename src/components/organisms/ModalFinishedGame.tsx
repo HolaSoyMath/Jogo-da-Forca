@@ -19,7 +19,7 @@ export default function ModalFinishedGame() {
     throw new Error("Context not found in LossGame.tsx");
   }
 
-  const { setModalOpen, modalOpen, gameState } = context;
+  const { setModalOpen, modalOpen, gameState, word } = context;
 
   return (
     <Dialog
@@ -35,7 +35,7 @@ export default function ModalFinishedGame() {
           {gameState === GameState.Loss ? (
             <>
               <p>Que pena, você foi enforcado!</p>
-              <p>Tente novamente e desvende a próxima palavra!</p>
+              <p>A palavra era <span className="font-semibold">{word.word}</span></p>
             </>
           ) : (
             <>
