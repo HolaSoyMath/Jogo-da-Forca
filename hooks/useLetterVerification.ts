@@ -18,6 +18,8 @@ export function useLetterVerification() {
   useEffect(() => {
     checkGameState();
   }, [correctLetters, wrongLetters, checkGameState]);
+    checkGameState();
+  }, [correctLetters, wrongLetters, checkGameState]);
 
   function verifyWord(letter: string) {
     if (correctWord.includes(letter)) {

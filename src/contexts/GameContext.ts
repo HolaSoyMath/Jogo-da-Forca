@@ -1,4 +1,5 @@
 import { GameState } from "@/enums/GameState";
+import { GameState } from "@/enums/GameState";
 import { createContext } from "react";
 
 interface GameContextType {

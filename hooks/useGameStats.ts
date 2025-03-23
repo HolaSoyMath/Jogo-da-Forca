@@ -39,14 +39,10 @@ export function useGameStats() {
       changeScoreboard('loss')
     }
     console.log('Win: ', localStorage.getItem('win'));
-    console.log('Loss: ', localStorage.getItem('loss'));
   }
-
-  function resetGame() {
-    setCorrectLetters([]);
     setWrongLetters([]);
     setGameState(GameState.Initial);
   }
 
   return { checkGameState, resetGame };
-}
+};

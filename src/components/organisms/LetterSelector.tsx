@@ -11,6 +11,7 @@ export default function LetterSelector() {
   }
 
   const { word } = context;
+  const { word } = context;
 
   return (
     <div className="w-full">
