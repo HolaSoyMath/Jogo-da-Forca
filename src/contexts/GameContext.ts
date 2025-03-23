@@ -9,10 +9,8 @@ interface GameContextType {
   setWrongLetters: React.Dispatch<React.SetStateAction<string[]>>;
   gameState: string;
   setGameState: React.Dispatch<React.SetStateAction<GameState>>;
-  modalOpenLoss: boolean;
-  setModalOpenLoss: React.Dispatch<React.SetStateAction<boolean>>;
-  modalOpenWin: boolean;
-  setModalOpenWin: React.Dispatch<React.SetStateAction<boolean>>;
+  modalOpen: boolean;
+  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const GameContext = createContext<GameContextType | null>(null);

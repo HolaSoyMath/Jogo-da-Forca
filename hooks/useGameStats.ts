@@ -16,7 +16,7 @@ export function useGameStats() {
     throw new Error("Not found a GameContext in gameState.ts");
   }
 
-  const { correctLetters, setCorrectLetters, wrongLetters, setWrongLetters, setGameState, gameState, word, setModalOpenLoss, setModalOpenWin } = context;
+  const { correctLetters, setCorrectLetters, wrongLetters, setWrongLetters, setGameState, gameState, word, setModalOpen } = context;
 
   const correctWord = removeDiacritics(word.word.toUpperCase()).split("");
 
@@ -45,8 +45,7 @@ export function useGameStats() {
   function resetGame() {
     setCorrectLetters([]);
     setWrongLetters([]);
-    setModalOpenLoss(false);
-    setModalOpenWin(false);
+    setModalOpen(false);
     setGameState(GameState.Initial);
   }
 

@@ -10,29 +10,39 @@ import {
 import GameContext from "@/contexts/GameContext";
 import ChartResults from "../molecules/ChartResults";
 import ResetGame from "../atoms/ResetGame";
+import { GameState } from "@/enums/GameState";
 
-export default function LossGame() {
+export default function ModalFinishedGame() {
   const context = useContext(GameContext);
 
   if (!context) {
     throw new Error("Context not found in LossGame.tsx");
   }
 
-  const { modalOpenLoss, setModalOpenLoss } = context;
+  const { setModalOpen, modalOpen, gameState } = context;
 
   return (
     <Dialog
-      open={modalOpenLoss}
+      open={modalOpen}
       onOpenChange={(open) => {
         if (!open) {
-          setModalOpenLoss(false);
+          setModalOpen(false);
         }
       }}
     >
       <DialogContent className="px-4 max-w-sm">
-        <DialogHeader className="text-xs md:text-m w-full flex items-center">
-          <p>Que pena, você foi enforcado!</p>
-          <p>Tente novamente e desvende a próxima palavra!</p>
+        <DialogHeader className="text-xs md:text-xl md:font-semibold w-full flex items-center">
+          {gameState === GameState.Loss ? (
+            <>
+              <p>Que pena, você foi enforcado!</p>
+              <p>Tente novamente e desvende a próxima palavra!</p>
+            </>
+          ) : (
+            <>
+              <p>Parabéns, você acertou a palavra!</p>
+              <p>Sua inteligência venceu a forca!</p>
+            </>
+          )}
         </DialogHeader>
         <DialogDescription className="w-full">
           <ChartResults />

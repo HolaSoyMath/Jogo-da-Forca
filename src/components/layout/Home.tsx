@@ -4,12 +4,11 @@ import React, { useEffect, useState } from "react";
 import LetterSelector from "../organisms/LetterSelector";
 import HangmanSide from "../organisms/HangmanSide";
 import GameContext from "@/contexts/GameContext";
-import LossGame from "../organisms/LossGame";
-import WinGame from "../organisms/WinGame";
 import { choicedWord } from "../../../hooks/choicedWord";
 import { GameState } from "@/enums/GameState";
 import WinFireworks from "../atoms/WinFireworks";
 import ResetGame from "../atoms/ResetGame";
+import ModalFinishedGame from "../organisms/ModalFinishedGame";
 
 export default function HomeLayout() {
   const [correctLetters, setCorrectLetters] = useState<string[]>([]);
@@ -24,15 +23,11 @@ export default function HomeLayout() {
     word: "",
     category: "",
   });
-  const [modalOpenLoss, setModalOpenLoss] = useState(false);
-  const [modalOpenWin, setModalOpenWin] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
-    if (gameState === GameState.Loss) {
-      setModalOpenLoss(true);
-    }
-    if (gameState === GameState.Win) {
-      setModalOpenWin(true);
+    if (gameState === GameState.Loss || gameState === GameState.Win) {
+      setModalOpen(true);
     }
   }, [gameState]);
 
@@ -60,10 +55,8 @@ export default function HomeLayout() {
             setWrongLetters,
             gameState,
             setGameState,
-            modalOpenLoss,
-            setModalOpenLoss,
-            modalOpenWin,
-            setModalOpenWin,
+            modalOpen,
+            setModalOpen,
           }}
         >
           <HangmanSide />
@@ -72,8 +65,7 @@ export default function HomeLayout() {
             {gameState === GameState.Win && <ResetGame />}
             {gameState === GameState.Loss && <ResetGame />}
           </div>
-          <WinGame />
-          <LossGame />
+          <ModalFinishedGame />
           {gameState === GameState.Win && <WinFireworks />}
         </GameContext.Provider>
       </div>
