@@ -29,11 +29,11 @@ export default function LossGame() {
         }
       }}
     >
-      <DialogContent>
-        <DialogHeader>
+      <DialogContent className="px-4 max-w-sm">
+        <DialogHeader className="text-xs md:text-m w-full flex items-center">
           Que pena, você foi enforcado! <br /> Tente novamente e desvende a próxima palavra!
         </DialogHeader>
-        <DialogDescription>
+        <DialogDescription className="w-full bg-yellow-50">
           <ChartResults />
           <div className="flex px-12 gap-x-2">
             <p className="w-1/2 text-center text-foreground font-semibold">
@@ -44,11 +44,9 @@ export default function LossGame() {
             </p>
           </div>
         </DialogDescription>
-        <DialogFooter className="flex-row justify-between">
-          <div className="flex w-full items-center">
+        <DialogFooter className="flex-row justify-between w-full">
+          <div className="flex w-full items-center justify-between">
             <DialogClose>Fechar</DialogClose>
-          </div>
-          <div>
             <ResetGame />
           </div>
         </DialogFooter>
