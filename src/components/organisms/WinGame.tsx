@@ -19,7 +19,7 @@ export default function WinGame() {
   }
 
   const { modalOpenWin, setModalOpenWin } = context;
-  
+
   return (
     <Dialog
       open={modalOpenWin}
@@ -31,7 +31,7 @@ export default function WinGame() {
     >
       <DialogContent>
         <DialogHeader>
-          Parabéns, você acertou a palavra! Sua inteligência venceu a forca!
+          Parabéns, você acertou a palavra! <br /> Sua inteligência venceu a forca!
         </DialogHeader>
         <DialogDescription>
           <ChartResults />
@@ -44,7 +44,7 @@ export default function WinGame() {
             </p>
           </div>
         </DialogDescription>
-        <DialogFooter>
+        <DialogFooter className="flex-row justify-between">
           <div className="flex w-full items-center">
             <DialogClose>Fechar</DialogClose>
           </div>
