@@ -31,9 +31,10 @@ export default function LossGame() {
     >
       <DialogContent className="px-4 max-w-sm">
         <DialogHeader className="text-xs md:text-m w-full flex items-center">
-          Que pena, você foi enforcado! <br /> Tente novamente e desvende a próxima palavra!
+          <p>Que pena, você foi enforcado!</p>
+          <p>Tente novamente e desvende a próxima palavra!</p>
         </DialogHeader>
-        <DialogDescription className="w-full bg-yellow-50">
+        <DialogDescription className="w-full">
           <ChartResults />
           <div className="flex px-12 gap-x-2">
             <p className="w-1/2 text-center text-foreground font-semibold">
