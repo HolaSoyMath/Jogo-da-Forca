@@ -11,8 +11,8 @@ export default function Footer() {
           <p className="mt-5">
             Site criado por <span className="font-bold">Matheus Santos</span>{" "}
             para testar e aprender novas funcionalidades do React, nesse projeto
-            em específico o foco compreender melhor o uso de:
-            <p className="italic">componentes, hooks e useContext.</p>
+            em específico o foco foi compreender melhor sobre <span className="italic">Atomic Design</span> e o uso de:
+            <p className="italic">Componentes, hooks e useContext.</p>
           </p>
         </div>
         <div>
