@@ -15,10 +15,10 @@ export default function LetterSelector() {
   return (
     <div className="w-full">
       <div className="mb-4">
-        <p className="mb-4 w-full text-center font-semibold">
+        <p className="mb-9 w-full text-center font-semibold text-xl">
           Dica: {word.category}
         </p>
-        <p className="mb-4 w-full text-center font-semibold">Palavra: {word.word}</p>
+        {/* <p className="mb-4 w-full text-center font-semibold">Palavra: {word.word}</p> */}
       </div>
       <LetterGroup />
     </div>
