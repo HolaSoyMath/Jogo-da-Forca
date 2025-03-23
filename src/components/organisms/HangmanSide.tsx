@@ -39,6 +39,15 @@ export default function HangmanSide() {
       </div>
       <div className="flex justify-center w-full gap-4">
         {selectedWord.map((letter, index) => {
+          
+          if (letter === " ") {
+            return (
+              <div key={index} className="text-2xl w-6 h-9 text-center">
+                &nbsp; {/* ou " " */}
+              </div>
+            );
+          }
+
           const normalizedLetter = removeDiacritics(letter);
           return (
             <div

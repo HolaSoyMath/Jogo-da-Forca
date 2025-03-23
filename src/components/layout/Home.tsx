@@ -69,8 +69,8 @@ export default function HomeLayout() {
           <HangmanSide />
           <div className="h-full gap-4 lg:h-96 flex flex-col justify-between pb-4 min-w-[300px]">
             <LetterSelector />
-            {gameState === GameState.Win ||
-              (gameState === GameState.Loss && <ResetGame />)}
+            {gameState === GameState.Win && <ResetGame />}
+            {gameState === GameState.Loss && <ResetGame />}
           </div>
           <WinGame />
           <LossGame />
