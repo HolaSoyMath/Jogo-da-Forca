@@ -16,7 +16,7 @@ export function useGameStats() {
     throw new Error("Not found a GameContext in gameState.ts");
   }
 
-  const { correctLetters, setCorrectLetters, wrongLetters, setWrongLetters, setGameState, gameState, word } = context;
+  const { correctLetters, setCorrectLetters, wrongLetters, setWrongLetters, setGameState, gameState, word, setModalOpenLoss, setModalOpenWin } = context;
 
   const correctWord = removeDiacritics(word.word.toUpperCase()).split("");
 
@@ -39,10 +39,16 @@ export function useGameStats() {
       changeScoreboard('loss')
     }
     console.log('Win: ', localStorage.getItem('win'));
+    console.log('Loss: ', localStorage.getItem('loss'));
   }
+
+  function resetGame() {
+    setCorrectLetters([]);
     setWrongLetters([]);
+    setModalOpenLoss(false);
+    setModalOpenWin(false);
     setGameState(GameState.Initial);
   }
 
   return { checkGameState, resetGame };
-};
+}
