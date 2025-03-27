@@ -38,8 +38,6 @@ export function useGameStats() {
       setGameState(GameState.Loss);
       changeScoreboard('loss')
     }
-    console.log('Win: ', localStorage.getItem('win'));
-    console.log('Loss: ', localStorage.getItem('loss'));
   }
 
   function resetGame() {
