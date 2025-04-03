@@ -3,9 +3,9 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
+  DialogTitle,
 } from "../ui/dialog";
 import GameContext from "@/contexts/GameContext";
 import ChartResults from "../molecules/ChartResults";
@@ -31,33 +31,36 @@ export default function ModalFinishedGame() {
       }}
     >
       <DialogContent className="px-4 max-w-sm">
-        <DialogHeader className="text-xs md:text-xl md:font-semibold w-full flex items-center">
-          {gameState === GameState.Loss ? (
-            <>
-              <p>Que pena, você foi enforcado!</p>
-              <p>A palavra era <span className="font-semibold">{word.word}</span></p>
-            </>
-          ) : (
-            <>
-              <p>Parabéns, você acertou a palavra!</p>
-              <p>Sua inteligência venceu a forca!</p>
-            </>
-          )}
+        <DialogHeader>
+          <DialogTitle className="text-xs md:text-xl md:font-semibold w-full text-center inline-block">
+            {gameState === GameState.Loss ? (
+              <>
+                <p>Que pena, você foi enforcado!</p>
+                <p>
+                  A palavra era{" "}
+                  <span className="font-semibold">{word.word}</span>
+                </p>
+              </>
+            ) : (
+              <>
+                <p>Parabéns, você acertou a palavra!</p>
+                <p>Sua inteligência venceu a forca!</p>
+              </>
+            )}
+          </DialogTitle>
         </DialogHeader>
-        <DialogDescription className="w-full">
-          <ChartResults />
-          <div className="flex px-12 gap-x-2">
-            <p className="w-1/2 text-center text-foreground font-semibold">
-              Vitória
-            </p>
-            <p className="w-1/2 text-center text-foreground font-semibold">
-              Derrota
-            </p>
-          </div>
-        </DialogDescription>
+        <ChartResults />
+        <div className="flex px-12 gap-x-2">
+          <p className="w-1/2 text-center text-foreground font-semibold">
+            Vitória
+          </p>
+          <p className="w-1/2 text-center text-foreground font-semibold">
+            Derrota
+          </p>
+        </div>
         <DialogFooter className="flex-row justify-between w-full">
           <div className="flex w-full items-center justify-between">
-            <DialogClose>Fechar</DialogClose>
+            <DialogClose className="cursor-pointer hover:bg-input px-4 py-2 rounded-md">Fechar</DialogClose>
             <ResetGame />
           </div>
         </DialogFooter>
