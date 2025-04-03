@@ -44,7 +44,8 @@ export default function RootLayout({
           userButtonPopoverCard: "!bg-background !shadow-lg !rounded-xl !border-2 !border-border",
           userButtonPopoverMain: "!bg-transparent !text-foreground",
           userButtonPopoverActionButton: "!text-foreground !hover:text-foreground",
-          userButtonPopoverFooter: "!hidden"
+          userButtonPopoverFooter: "!hidden",
+          footer: "!hidden"
         },
       }}
     >
