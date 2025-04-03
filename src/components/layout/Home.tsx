@@ -10,7 +10,7 @@ import WinFireworks from "../atoms/WinFireworks";
 import ResetGame from "../atoms/ResetGame";
 import ModalFinishedGame from "../organisms/ModalFinishedGame";
 import { useClerk } from "@clerk/nextjs";
-import { getRankingById } from "@/services/getRankingById";
+import { getResultsById } from "@/services/getResultsById";
 import ResponseResultById from "@/interface/ResponseResultById";
 
 export default function HomeLayout() {
@@ -50,13 +50,13 @@ export default function HomeLayout() {
   useEffect(() => {
     async function getScore() {
       if (isSignedIn && user) {
-        const response: ResponseResultById = await getRankingById(user.id);
+        const response: ResponseResultById = await getResultsById(user.id);
         localStorage.setItem("win", response.win.toString());
         localStorage.setItem("loss", response.loss.toString());
       }
     }
     getScore();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSignedIn]);
 
   return (

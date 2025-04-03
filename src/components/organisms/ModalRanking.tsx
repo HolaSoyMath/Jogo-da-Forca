@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
 } from "../ui/dialog";
@@ -44,8 +43,9 @@ export function ModalRanking({ isOpen, onClose }: any) {
             Top 10 Players
           </DialogTitle>
         </DialogHeader>
-        <DialogDescription>
-          {results.length > 0 ? (
+        {results === null ? (
+            <p className="text-center text-foreground text-xl">Carregando...</p>
+          ) : results.length > 0 ? (
             <Table>
               <TableHeader>
                 <TableRow>
@@ -60,16 +60,17 @@ export function ModalRanking({ isOpen, onClose }: any) {
                   <TableRow key={index}>
                     <TableCell className="text-center text-foreground">
                       <span
-                        className={`inline-block rounded-full w-5 h-center text-foreground ${
-                          index == 0 && "bg-amber-500"
-                        } ${index == 1 && "bg-zinc-500"} ${
-                          index == 2 && "bg-amber-700"
+                        className={`inline-flex items-center justify-center rounded-full w-5 h-5 text-white font-bold ${
+                          index === 0 ? "bg-amber-500" :
+                          index === 1 ? "bg-gray-500" :
+                          index === 2 ? "bg-amber-700" :
+                          "bg-transparent"
                         }`}
                       >
                         {index + 1}
                       </span>
                     </TableCell>
-                    <TableCell className="center text-foreground">
+                    <TableCell className="text-center text-foreground">
                       {result.username}
                     </TableCell>
                     <TableCell className="text-center text-foreground">
@@ -83,9 +84,10 @@ export function ModalRanking({ isOpen, onClose }: any) {
               </TableBody>
             </Table>
           ) : (
-            <p className="text-center text-foreground text-xl">Carregando...</p>
+            <p className="text-center text-foreground text-xl">
+              Sem dados a serem carregados
+            </p>
           )}
-        </DialogDescription>
       </DialogContent>
     </Dialog>
   );
