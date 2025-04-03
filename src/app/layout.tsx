@@ -35,7 +35,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider localization={ptBR}>
+    <ClerkProvider
+      localization={ptBR}
+      appearance={{
+        elements: {
+          userButtonBox: "h-12 px-3 text-foreground hover:bg-input rounded-lg !focus-visible:outline-none",
+          userButtonBox__open: "!bg-input !outline-none",
+          userButtonPopoverCard: "!bg-background !shadow-lg !rounded-xl !border-2 !border-border",
+          userButtonPopoverMain: "!bg-transparent !text-foreground",
+          userButtonPopoverActionButton: "!text-foreground !hover:text-foreground",
+          userButtonPopoverFooter: "!hidden"
+        },
+      }}
+    >
       <html lang="pt-br">
         <body
           className={`${poppins.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
