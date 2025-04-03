@@ -14,7 +14,7 @@ export default function Header() {
     <header className="w-full h-16">
       <div className="flex justify-between items-center h-full max-w-[900px] mx-auto px-10 lg:px-0">
         <p className="text-2xl font-semibold">Jogo da Forca</p>
-        <div className="flex gap-4 items-center">
+        <div className="flex gap-2 items-center">
           <ToggleTheme />
           <SignedOut>
             <SignInButton>
@@ -29,7 +29,20 @@ export default function Header() {
             </SignUpButton>
           </SignedOut>
           <SignedIn>
-            <UserButton />
+            <UserButton
+              showName={true}
+              appearance={{
+                elements: {
+                  userButtonBox:
+                    "h-12 px-3 text-foreground hover:bg-input rounded-lg !focus-visible:outline-none",
+                    userButtonBox__open: '!bg-input !outline-none',
+                    userButtonPopoverCard: '!bg-background !shadow-lg !rounded-xl !border-2 !border-border',
+                    userButtonPopoverMain: '!bg-transparent !text-foreground', 
+                    userButtonPopoverActionButton : '!text-foreground !hover:text-foreground',
+                    userButtonPopoverFooter: '!hidden'
+                },
+              }}
+            />
           </SignedIn>
         </div>
       </div>
