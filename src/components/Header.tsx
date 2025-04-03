@@ -8,7 +8,6 @@ import {
   SignUpButton,
   SignedIn,
   UserButton,
-  useClerk,
 } from "@clerk/nextjs";
 import { Button } from "./ui/button";
 import { ChartNoAxesColumn } from "lucide-react";
@@ -17,14 +16,12 @@ import { ModalRanking } from "./organisms/ModalRanking";
 export default function Header() {
 
   const [isRankingOpen, setIsRankingOpen] = useState(false);
-  const { isSignedIn } = useClerk()
 
   return (
     <header className="w-full h-16">
       <div className="flex justify-between items-center h-full max-w-[900px] mx-auto px-10 lg:px-0">
         <p className="text-2xl font-semibold">Jogo da Forca</p>
         <div className="flex gap-2 items-center">
-          <p>Teste: {isSignedIn ? "sim" : "Não"}</p>
           <Button className="cursor-pointer bg-background text-foreground hover:bg-input" onClick={() => setIsRankingOpen(true)}>
             <ChartNoAxesColumn />
             Ranking
