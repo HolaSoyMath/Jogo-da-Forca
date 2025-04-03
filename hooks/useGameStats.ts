@@ -1,22 +1,34 @@
 import GameContext from "@/contexts/GameContext";
 import { GameState } from "@/enums/GameState";
 import { removeDiacritics } from "@/functions/RemoveDiacritics";
+import { saveResult } from "@/services/saveResult";
+import { useUser } from "@clerk/nextjs";
 import { useContext } from "react";
 
-function changeScoreboard(scoreboard: string){
-  const localValue = localStorage.getItem(scoreboard)
-  const newValue: number = localValue ? parseInt(localValue) + 1 : 1
-  localStorage.setItem(scoreboard, newValue.toString())
+function changeScoreboard(scoreboard: string) {
+  const localValue = localStorage.getItem(scoreboard);
+  const newValue: number = localValue ? parseInt(localValue) + 1 : 1;
+  localStorage.setItem(scoreboard, newValue.toString());
 }
 
 export function useGameStats() {
   const context = useContext(GameContext);
+  const { user } = useUser();
 
   if (!context) {
     throw new Error("Not found a GameContext in gameState.ts");
   }
 
-  const { correctLetters, setCorrectLetters, wrongLetters, setWrongLetters, setGameState, gameState, word, setModalOpen } = context;
+  const {
+    correctLetters,
+    setCorrectLetters,
+    wrongLetters,
+    setWrongLetters,
+    setGameState,
+    gameState,
+    word,
+    setModalOpen,
+  } = context;
 
   const correctWord = removeDiacritics(word.word.toUpperCase()).split("");
 
@@ -31,12 +43,19 @@ export function useGameStats() {
 
     if (allLettersGuessed) {
       setGameState(GameState.Win);
-      changeScoreboard('win')
+      
+      if (user?.id) {
+        saveResult(user.id, "win");
+      }
+      changeScoreboard("win");
     }
 
     if (wrongLetters.length === 6) {
       setGameState(GameState.Loss);
-      changeScoreboard('loss')
+      if (user?.id) {
+        saveResult(user.id, "loss");
+      }
+      changeScoreboard("loss");
     }
   }
 

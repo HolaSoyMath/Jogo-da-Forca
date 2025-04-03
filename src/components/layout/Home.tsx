@@ -9,8 +9,12 @@ import { GameState } from "@/enums/GameState";
 import WinFireworks from "../atoms/WinFireworks";
 import ResetGame from "../atoms/ResetGame";
 import ModalFinishedGame from "../organisms/ModalFinishedGame";
+import { useClerk } from "@clerk/nextjs";
+import { getRankingById } from "@/services/getRankingById";
+import ResponseResultById from "@/interface/ResponseResultById";
 
 export default function HomeLayout() {
+  const { isSignedIn, user } = useClerk();
   const [correctLetters, setCorrectLetters] = useState<string[]>([]);
   const [wrongLetters, setWrongLetters] = useState<string[]>([]);
   const [gameState, setGameState] = useState(GameState.Initial);
@@ -42,6 +46,18 @@ export default function HomeLayout() {
       setGameState(GameState.Playing);
     }
   }, [gameState]);
+
+  useEffect(() => {
+    async function getScore() {
+      if (isSignedIn && user) {
+        const response: ResponseResultById = await getRankingById(user.id);
+        localStorage.setItem("win", response.win.toString());
+        localStorage.setItem("loss", response.loss.toString());
+      }
+    }
+    getScore();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSignedIn]);
 
   return (
     <div className="w-full">
