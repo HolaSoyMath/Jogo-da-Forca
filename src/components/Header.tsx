@@ -11,6 +11,7 @@ import { ChartNoAxesColumn } from "lucide-react";
 import { ModalRanking } from "./organisms/ModalRanking";
 import LoginMenuCollapsed from "./molecules/loginMenu/LoginMenuCollapsed";
 import LoginMenuExpanded from "./molecules/loginMenu/LoginMenuExpanded";
+import { useWindowSize } from "../../hooks/useWindowsSize";
 
 export default function Header() {
 
@@ -30,7 +31,7 @@ export default function Header() {
           <LoginMenuExpanded />
           <SignedIn>
             <UserButton
-              showName={true}
+              showName={useWindowSize().width > 768}
             />
           </SignedIn>
         </div>
