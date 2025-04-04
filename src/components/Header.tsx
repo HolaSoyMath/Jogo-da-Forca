@@ -3,15 +3,14 @@
 import React, { useState } from "react";
 import { ToggleTheme } from "./ToggleTheme";
 import {
-  SignedOut,
-  SignInButton,
-  SignUpButton,
   SignedIn,
   UserButton,
 } from "@clerk/nextjs";
 import { Button } from "./ui/button";
 import { ChartNoAxesColumn } from "lucide-react";
 import { ModalRanking } from "./organisms/ModalRanking";
+import LoginMenuCollapsed from "./molecules/loginMenu/LoginMenuCollapsed";
+import LoginMenuExpanded from "./molecules/loginMenu/LoginMenuExpanded";
 
 export default function Header() {
 
@@ -20,25 +19,15 @@ export default function Header() {
   return (
     <header className="w-full h-16">
       <div className="flex justify-between items-center h-full max-w-[900px] mx-auto px-10 lg:px-0">
-        <p className="text-2xl font-semibold">Jogo da Forca</p>
+        <p className="md:text-2xl font-semibold text-xl">Jogo da Forca</p>
         <div className="flex gap-2 items-center">
           <Button className="cursor-pointer bg-background text-foreground hover:bg-input" onClick={() => setIsRankingOpen(true)}>
             <ChartNoAxesColumn />
-            Ranking
+            <span className="hidden md:inline ml-2">Ranking</span>
           </Button>
           <ToggleTheme />
-          <SignedOut>
-            <SignInButton>
-              <Button className="cursor-pointer bg-background text-foreground border-1 border-border hover:text-background">
-                Entrar
-              </Button>
-            </SignInButton>
-            <SignUpButton>
-              <Button className="cursor-pointer bg-background text-foreground border-1 border-border hover:text-background">
-                Registrar
-              </Button>
-            </SignUpButton>
-          </SignedOut>
+          <LoginMenuCollapsed />
+          <LoginMenuExpanded />
           <SignedIn>
             <UserButton
               showName={true}
